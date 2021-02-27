@@ -215,8 +215,8 @@ public class App
 						drawData(g,leaderboard5, 20, (i+105)*26, 130, (i+105)*26+24, cropPoints3[i].x+351, cropPoints3[i].y+34, cropPoints3[i].x+481, cropPoints3[i].y+58, null);
 					}
 					ImageIO.write(cropped1,"png",new File("testing_leaderboardnames.png"));
-				} catch (IOException e) {
-					e.printStackTrace();
+				} catch (Exception e) {
+					System.out.println(e.getMessage());
 				}
 		    	list[0].delete();
 		    	list[1].delete();
