@@ -65,7 +65,7 @@ class SubmitThread implements Runnable{
 		HttpClient httpclient = HttpClients.createDefault();
 		HttpPost httppost = new HttpPost("http://projectdivar.com/eventsubmit");
 		List<NameValuePair> params = new ArrayList<NameValuePair>();
-		params.add(new BasicNameValuePair("eventid", Integer.toString(7)));
+		params.add(new BasicNameValuePair("eventid", Integer.toString(event)));
 		params.add(new BasicNameValuePair("rank", Integer.toString(rank)));
 		params.add(new BasicNameValuePair("name", name));
 		params.add(new BasicNameValuePair("description", description));
@@ -89,7 +89,7 @@ class SubmitThread implements Runnable{
 		    try (InputStream instream = entity.getContent()) {
 		    	Scanner s = new Scanner(instream).useDelimiter("\\A");
 		    	String result = s.hasNext() ? s.next() : "";
-				System.out.println("Rank "+rank+": "+result);
+				System.out.println("Rank "+rank+": "+result+"("+points+")");
 		    	instream.close();
 		    } catch (UnsupportedOperationException | IOException e) {
 				e.printStackTrace();
@@ -260,7 +260,7 @@ public class App
         	String newString = ss.replaceFirst("A","").trim();
         	data[count++]=newString;
         }
-        System.out.println(Arrays.toString(data));
+        //System.out.println(Arrays.toString(data));
         String[] t20names = new String[20];
         int arrayOffset = 0;
         for (int i=0;i<20;i++) {
@@ -324,8 +324,8 @@ public class App
         	}
         }
 
-        //System.out.println(Arrays.toString(t20scores));
-        //System.out.println(Arrays.toString(lowerTierScores));
+        System.out.println(Arrays.toString(t20scores));
+        System.out.println(Arrays.toString(lowerTierScores));
         for (int i=0;i<20;i++) {
         	new Thread(
 					new SubmitThread(t20names[i],t20desc[i],t20scores[i],EVENT,i+1))
