@@ -131,13 +131,13 @@ public class App
     			new Rectangle(295,802,200,26)
     	};
 
-    	File folder = new File("screenshots");
+    	File folder = new File("Screenshots");
     	File[] list2 = folder.listFiles();
 		for (File fff : list2) {
 			fff.delete();
 		}
     	while (true) {
-	    	File f = new File("screenshots");
+	    	File f = new File("Screenshots");
 	    	if (f.listFiles().length==5) {
 	    		//New files found!
 
