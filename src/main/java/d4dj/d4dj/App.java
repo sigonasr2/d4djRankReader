@@ -224,7 +224,11 @@ public class App
 		    	list[3].delete();
 		    	list[4].delete();
 		        String filePath = "testing_leaderboardnames.png";
-		        detectText(filePath);
+		        try {
+		        	detectText(filePath);
+		        } catch (Exception e) {
+		        	System.out.println(e.getMessage());
+		        }
 	    	} else {
 		    	if (f.listFiles().length>5) {
 			    	File[] list = f.listFiles();
@@ -367,7 +371,7 @@ public class App
         		error1=true;
         		break;
         	}
-        }
+        }//227
         boolean error2=false;
         for (int i=0;i<10;i++) {
         	if (!StringUtils.isNumeric(lowerTierScores[i])) {
