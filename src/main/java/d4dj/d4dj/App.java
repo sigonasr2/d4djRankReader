@@ -360,7 +360,7 @@ public class App
 
         System.out.println(Arrays.toString(t20scores));
         System.out.println(Arrays.toString(lowerTierScores));
-        /*
+        
         for (int i=0;i<20;i++) {
         	new Thread(
 					new SubmitThread(t20names[i],t20desc[i],t20scores[i],EVENT,i+1))
@@ -372,7 +372,7 @@ public class App
 					new SubmitThread(lowerTierNames[j],lowerTierDesc[j],lowerTierScores[j],EVENT,ranks[j]))
 			.start();
         }
-        */
+        
       }
       
 }
