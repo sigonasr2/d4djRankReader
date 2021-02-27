@@ -288,6 +288,7 @@ public class App
               //System.out.format("Position : %s%n", annotation.getBoundingPoly());
             }
           }
+          client.close();
         }
         //System.out.println(reader);
         
