@@ -21,6 +21,7 @@ import java.util.Scanner;
 
 import javax.imageio.ImageIO;
 
+import org.apache.commons.lang3.StringUtils;
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
 import org.apache.http.NameValuePair;
@@ -360,18 +361,40 @@ public class App
 
         System.out.println(Arrays.toString(t20scores));
         System.out.println(Arrays.toString(lowerTierScores));
-        
+        boolean error1=false;
         for (int i=0;i<20;i++) {
-        	new Thread(
-					new SubmitThread(t20names[i],t20desc[i],t20scores[i],EVENT,i+1))
-			.start();
+        	if (!StringUtils.isNumeric(t20scores[i])) {
+        		error1=true;
+        		break;
+        	}
+        }
+        boolean error2=false;
+        for (int i=0;i<10;i++) {
+        	if (!StringUtils.isNumeric(lowerTierScores[i])) {
+        		error2=true;
+        		break;
+        	}
+        }
+        
+        if (!error1) {
+		    for (int i=0;i<20;i++) {
+		    	new Thread(
+						new SubmitThread(t20names[i],t20desc[i],t20scores[i],EVENT,i+1))
+				.start();
+		    }
+        } else {
+	        System.out.println("Cannot submit t20 scores. Invalid array params.");
         }
         int[] ranks = new int[] {50,100,500,1000,2000,5000,10000,20000,30000,50000};
-        for (int j=0;j<10;j++) {
-        	new Thread(
-					new SubmitThread(lowerTierNames[j],lowerTierDesc[j],lowerTierScores[j],EVENT,ranks[j]))
-			.start();
-        }
+        if (!error2) {
+	        for (int j=0;j<10;j++) {
+	        	new Thread(
+						new SubmitThread(lowerTierNames[j],lowerTierDesc[j],lowerTierScores[j],EVENT,ranks[j]))
+				.start();
+	        }
+	      } else {
+		        System.out.println("Cannot submit lower tier scores. Invalid array params.");
+	      }
         
       }
       
