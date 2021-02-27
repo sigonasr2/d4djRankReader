@@ -1,5 +1,6 @@
 package d4dj.d4dj;
 
+import java.awt.Color;
 import java.awt.Graphics2D;
 import java.awt.Image;
 import java.awt.Point;
@@ -116,8 +117,8 @@ public class App
     			new Rectangle(295,783,200,26),
     	};
     	Rectangle[] cropPoints2 = {
-    			new Rectangle(295,537,200,26),
-    			new Rectangle(295,614,200,26)
+    			new Rectangle(295,0,200,26),
+    			new Rectangle(295,77,200,26)
     	};
     	Rectangle[] cropPoints3 = {
     			new Rectangle(295,183,200,26),
@@ -146,7 +147,7 @@ public class App
 		    	File[] list = f.listFiles();
 		    	try {
 					Image leaderboard = ImageIO.read(list[0]);
-					Image leaderboard2 = ImageIO.read(list[1]);
+					BufferedImage leaderboard2 = ImageIO.read(list[1]);
 					Image leaderboard3 = ImageIO.read(list[2]);
 					Image leaderboard4 = ImageIO.read(list[3]);
 					Image leaderboard5 = ImageIO.read(list[4]);
@@ -159,10 +160,43 @@ public class App
 						drawData(g,leaderboard, 20, (i+20)*26, 340, (i+20)*26+26, cropPoints1[i].x, cropPoints1[i].y+40, cropPoints1[i].x+340, cropPoints1[i].y+cropPoints1[i].height+40, null);
 						drawData(g,leaderboard, 20, (i+40)*26, 130, (i+40)*26+24, cropPoints1[i].x+351, cropPoints1[i].y+34, cropPoints1[i].x+481, cropPoints1[i].y+58, null);
 					}
+					
+					
+					//start at X 146
+					//Find R73,G40,B180
+					//Scroll down until you find R>220,G>220,B>220
+					//Scroll back up until you find 36,17,77
+					//That is the Y position you start at.
+					int MAXTRIES=1000;
+					int count=0;
+					int YMarker=145;
+					while (count++<MAXTRIES) {
+						Color c = new Color(leaderboard2.getRGB(146, YMarker++));
+						if (c.getRed()==73&&c.getGreen()==40&&c.getBlue()==180) {
+							System.out.println("Step 1 - Found! Y:"+(YMarker-1));
+							break;
+						}
+					}count=0;
+					while (count++<MAXTRIES) {
+						Color c = new Color(leaderboard2.getRGB(146, YMarker++));
+						if (c.getRed()>=220&&c.getGreen()>=220&&c.getBlue()>=220) {
+							System.out.println("Step 2 - Found! Y:"+(YMarker-1));
+							break;
+						}
+					}count=0;
+					while (count++<MAXTRIES) {
+						Color c = new Color(leaderboard2.getRGB(146, YMarker--));
+						if (c.getRed()==36&&c.getGreen()==17&&c.getBlue()==77) {
+							System.out.println("Step 3 - Found! Y:"+(YMarker+1));
+							break;
+						}
+					}count=0;
+					int YOFFSET = YMarker+1;
+					
 					for (int i=0;i<cropPoints2.length;i++) {
-						drawData(g,leaderboard2, 20, (i+9)*26, 200, (i+9)*26+26, cropPoints2[i].x, cropPoints2[i].y, cropPoints2[i].x+cropPoints2[i].width, cropPoints2[i].y+cropPoints2[i].height, null);
-						drawData(g,leaderboard2, 20, (i+29)*26, 340, (i+29)*26+26, cropPoints2[i].x, cropPoints2[i].y+40, cropPoints2[i].x+340, cropPoints2[i].y+cropPoints2[i].height+40, null);
-						drawData(g,leaderboard2, 20, (i+49)*26, 130, (i+49)*26+24, cropPoints2[i].x+351, cropPoints2[i].y+34, cropPoints2[i].x+481, cropPoints2[i].y+58, null);
+						drawData(g,leaderboard2, 20, (i+9)*26, 200, (i+9)*26+26, cropPoints2[i].x, YOFFSET+cropPoints2[i].y, cropPoints2[i].x+cropPoints2[i].width, YOFFSET+cropPoints2[i].y+cropPoints2[i].height, null);
+						drawData(g,leaderboard2, 20, (i+29)*26, 340, (i+29)*26+26, cropPoints2[i].x, YOFFSET+cropPoints2[i].y+40, cropPoints2[i].x+340, YOFFSET+cropPoints2[i].y+cropPoints2[i].height+40, null);
+						drawData(g,leaderboard2, 20, (i+49)*26, 130, (i+49)*26+24, cropPoints2[i].x+351, YOFFSET+cropPoints2[i].y+34, cropPoints2[i].x+481, YOFFSET+cropPoints2[i].y+58, null);
 					}
 					for (int i=0;i<cropPoints3.length;i++) {
 						drawData(g,leaderboard3, 20, (i+11)*26, 200, (i+11)*26+26, cropPoints3[i].x, cropPoints3[i].y, cropPoints3[i].x+cropPoints3[i].width, cropPoints3[i].y+cropPoints3[i].height, null);
@@ -326,6 +360,7 @@ public class App
 
         System.out.println(Arrays.toString(t20scores));
         System.out.println(Arrays.toString(lowerTierScores));
+        /*
         for (int i=0;i<20;i++) {
         	new Thread(
 					new SubmitThread(t20names[i],t20desc[i],t20scores[i],EVENT,i+1))
@@ -337,7 +372,7 @@ public class App
 					new SubmitThread(lowerTierNames[j],lowerTierDesc[j],lowerTierScores[j],EVENT,ranks[j]))
 			.start();
         }
-        
+        */
       }
       
 }
