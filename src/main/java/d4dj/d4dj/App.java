@@ -135,6 +135,14 @@ public class App
 
     	File folder = new File("Screenshots");
     	File[] list2 = folder.listFiles();
+    	do {
+			try {
+				Thread.sleep(10000);
+			} catch (InterruptedException e) {
+				e.printStackTrace();
+			}
+			list2 = folder.listFiles();
+    	} while (list2.length%5!=0);
 		for (File fff : list2) {
 			fff.delete();
 		}
@@ -216,6 +224,7 @@ public class App
 					}
 					ImageIO.write(cropped1,"png",new File("testing_leaderboardnames.png"));
 					g.dispose();
+					cropped1.flush();
 				} catch (Exception e) {
 					System.out.println(e.getMessage());
 				}
