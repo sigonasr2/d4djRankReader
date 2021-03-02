@@ -395,9 +395,16 @@ public class App
         
         if (!error1) {
 		    for (int i=0;i<20;i++) {
-		    	new Thread(
-						new SubmitThread(t20names[i],t20desc[i],t20scores[i],EVENT,i+1))
-				.start();
+		    	if (lastScores[i]==0||(
+        				StringUtils.isNumeric(lowerTierScores[i])&&
+        				lastScores[i]<Integer.parseInt(lowerTierScores[i]))) {
+			    	new Thread(
+							new SubmitThread(t20names[i],t20desc[i],t20scores[i],EVENT,i+1))
+					.start();
+		        	lastScores[i]=Integer.parseInt(lowerTierScores[i]);
+        		} else {
+    		        System.out.println("No update required for rank "+(i+1));
+        		}
 		    }
         } else {
 	        System.out.println("Cannot submit t20 scores. Invalid array params.");
