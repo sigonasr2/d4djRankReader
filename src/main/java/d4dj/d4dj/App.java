@@ -103,6 +103,8 @@ public class App
 {
 	public static Image paragraph;
 	final static int EVENT = 11;
+	public static int[] lastScores = new int[]{0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0};
+	public static int[] lastLowerTierScores = new int[]{0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0};
 	
     public static void main( String[] args ) throws IOException
     {
@@ -403,9 +405,22 @@ public class App
         int[] ranks = new int[] {50,100,500,1000,2000,5000,10000,20000,30000,50000};
         if (!error2) {
 	        for (int j=0;j<10;j++) {
-	        	new Thread(
-						new SubmitThread(lowerTierNames[j],lowerTierDesc[j],lowerTierScores[j],EVENT,ranks[j]))
-				.start();
+	        	try {
+			    	//if (j>=1&&j<9&&Integer.parseInt(lowerTierScores[j])>Integer.parseInt(lowerTierScores[j+1])&&Integer.parseInt(lowerTierScores[j])<Integer.parseInt(lowerTierScores[j+1])) {
+	        		if (lastLowerTierScores[j]==0||(
+	        				StringUtils.isNumeric(lowerTierScores[j])&&
+	        				lastLowerTierScores[j]<Integer.parseInt(lowerTierScores[j]))) {
+			        	new Thread(
+								new SubmitThread(lowerTierNames[j],lowerTierDesc[j],lowerTierScores[j],EVENT,ranks[j]))
+						.start();
+			        	lastLowerTierScores[j]=Integer.parseInt(lowerTierScores[j]);
+	        		} else {
+	    		        System.out.println("No update required for rank "+ranks[j]);
+	        		}
+			    	//}
+	        	} catch (Exception e) {
+			        System.out.println("Cannot parse score for rank "+ranks[j]+".");
+	        	}
 	        }
 	      } else {
 		        System.out.println("Cannot submit lower tier scores. Invalid array params.");
