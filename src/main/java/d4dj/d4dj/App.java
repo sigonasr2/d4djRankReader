@@ -407,16 +407,9 @@ public class App
 	        for (int j=0;j<10;j++) {
 	        	try {
 			    	//if (j>=1&&j<9&&Integer.parseInt(lowerTierScores[j])>Integer.parseInt(lowerTierScores[j+1])&&Integer.parseInt(lowerTierScores[j])<Integer.parseInt(lowerTierScores[j+1])) {
-	        		if (lastLowerTierScores[j]==0||(
-	        				StringUtils.isNumeric(lowerTierScores[j])&&
-	        				lastLowerTierScores[j]<Integer.parseInt(lowerTierScores[j]))) {
 			        	new Thread(
 								new SubmitThread(lowerTierNames[j],lowerTierDesc[j],lowerTierScores[j],EVENT,ranks[j]))
 						.start();
-			        	lastLowerTierScores[j]=Integer.parseInt(lowerTierScores[j]);
-	        		} else {
-	    		        System.out.println("No update required for rank "+ranks[j]);
-	        		}
 			    	//}
 	        	} catch (Exception e) {
 			        System.out.println("Cannot parse score for rank "+ranks[j]+".");
