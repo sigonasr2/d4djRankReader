@@ -230,11 +230,10 @@ public class App
 				} catch (Exception e) {
 					System.out.println(e.getMessage());
 				}
-		    	list[0].delete();
-		    	list[1].delete();
-		    	list[2].delete();
-		    	list[3].delete();
-		    	list[4].delete();
+		    	File[] list3 = f.listFiles();
+	    		for (File ff : list3) {
+	    			ff.delete();
+	    		}
 		        String filePath = "testing_leaderboardnames.png";
 		        try {
 		        	detectText(filePath);
@@ -312,7 +311,7 @@ public class App
         	String newString = ss.replaceFirst("A","").trim();
         	data[count++]=newString;
         }
-        //System.out.println(Arrays.toString(data));
+        System.out.println(Arrays.toString(data));
         String[] t20names = new String[20];
         int arrayOffset = 0;
         for (int i=0;i<20;i++) {
