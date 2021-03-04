@@ -169,7 +169,7 @@ public class App
 					for (int i=0;i<cropPoints1.length;i++) {
 						drawData(g,leaderboard, 20, i*26, 200, i*26+26, cropPoints1[i].x, cropPoints1[i].y, cropPoints1[i].x+cropPoints1[i].width, cropPoints1[i].y+cropPoints1[i].height, null);
 						drawData(g,leaderboard, 20, (i+20)*26, 340, (i+20)*26+26, cropPoints1[i].x, cropPoints1[i].y+40, cropPoints1[i].x+340, cropPoints1[i].y+cropPoints1[i].height+40, null);
-						drawData(g,leaderboard, 20, (i+40)*26, 130, (i+40)*26+24, cropPoints1[i].x+351, cropPoints1[i].y+34, cropPoints1[i].x+481, cropPoints1[i].y+58, null);
+						drawData(g,leaderboard, 40, (i+40)*26, 150, (i+40)*26+24, cropPoints1[i].x+351, cropPoints1[i].y+34, cropPoints1[i].x+481, cropPoints1[i].y+58, null);
 					}
 					
 					
