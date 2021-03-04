@@ -207,22 +207,22 @@ public class App
 					for (int i=0;i<cropPoints2.length;i++) {
 						drawData(g,leaderboard2, 20, (i+9)*26, 200, (i+9)*26+26, cropPoints2[i].x, YOFFSET+cropPoints2[i].y, cropPoints2[i].x+cropPoints2[i].width, YOFFSET+cropPoints2[i].y+cropPoints2[i].height, null);
 						drawData(g,leaderboard2, 20, (i+29)*26, 340, (i+29)*26+26, cropPoints2[i].x, YOFFSET+cropPoints2[i].y+40, cropPoints2[i].x+340, YOFFSET+cropPoints2[i].y+cropPoints2[i].height+40, null);
-						drawData(g,leaderboard2, 20, (i+49)*26, 130, (i+49)*26+24, cropPoints2[i].x+351, YOFFSET+cropPoints2[i].y+34, cropPoints2[i].x+481, YOFFSET+cropPoints2[i].y+58, null);
+						drawData(g,leaderboard2, 40, (i+49)*26, 150, (i+49)*26+24, cropPoints2[i].x+351, YOFFSET+cropPoints2[i].y+34, cropPoints2[i].x+481, YOFFSET+cropPoints2[i].y+58, null);
 					}
 					for (int i=0;i<cropPoints3.length;i++) {
 						drawData(g,leaderboard3, 20, (i+11)*26, 200, (i+11)*26+26, cropPoints3[i].x, cropPoints3[i].y, cropPoints3[i].x+cropPoints3[i].width, cropPoints3[i].y+cropPoints3[i].height, null);
 						drawData(g,leaderboard3, 20, (i+31)*26, 340, (i+31)*26+26, cropPoints3[i].x, cropPoints3[i].y+40, cropPoints3[i].x+340, cropPoints3[i].y+cropPoints3[i].height+40, null);
-						drawData(g,leaderboard3, 20, (i+51)*26, 130, (i+51)*26+24, cropPoints3[i].x+351, cropPoints3[i].y+34, cropPoints3[i].x+481, cropPoints3[i].y+58, null);
+						drawData(g,leaderboard3, 40, (i+51)*26, 150, (i+51)*26+24, cropPoints3[i].x+351, cropPoints3[i].y+34, cropPoints3[i].x+481, cropPoints3[i].y+58, null);
 					}
 					for (int i=0;i<cropPoints1.length;i++) {
 						drawData(g,leaderboard4, 20, (i+60)*26, 200, (i+60)*26+26, cropPoints1[i].x, cropPoints1[i].y, cropPoints1[i].x+cropPoints1[i].width, cropPoints1[i].y+cropPoints1[i].height, null);
 						drawData(g,leaderboard4, 20, (i+78)*26, 340, (i+78)*26+26, cropPoints1[i].x, cropPoints1[i].y+40, cropPoints1[i].x+340, cropPoints1[i].y+cropPoints1[i].height+40, null);
-						drawData(g,leaderboard4, 20, (i+96)*26, 130, (i+96)*26+24, cropPoints1[i].x+351, cropPoints1[i].y+34, cropPoints1[i].x+481, cropPoints1[i].y+58, null);
+						drawData(g,leaderboard4, 40, (i+96)*26, 150, (i+96)*26+24, cropPoints1[i].x+351, cropPoints1[i].y+34, cropPoints1[i].x+481, cropPoints1[i].y+58, null);
 					}
 					for (int i=0;i<cropPoints3.length;i++) {
 						drawData(g,leaderboard5, 20, (i+69)*26, 200, (i+69)*26+26, cropPoints3[i].x, cropPoints3[i].y, cropPoints3[i].x+cropPoints3[i].width, cropPoints3[i].y+cropPoints3[i].height, null);
 						drawData(g,leaderboard5, 20, (i+87)*26, 340, (i+87)*26+26, cropPoints3[i].x, cropPoints3[i].y+40, cropPoints3[i].x+340, cropPoints3[i].y+cropPoints3[i].height+40, null);
-						drawData(g,leaderboard5, 20, (i+105)*26, 130, (i+105)*26+24, cropPoints3[i].x+351, cropPoints3[i].y+34, cropPoints3[i].x+481, cropPoints3[i].y+58, null);
+						drawData(g,leaderboard5, 40, (i+105)*26, 150, (i+105)*26+24, cropPoints3[i].x+351, cropPoints3[i].y+34, cropPoints3[i].x+481, cropPoints3[i].y+58, null);
 					}
 					ImageIO.write(cropped1,"png",new File("testing_leaderboardnames.png"));
 					g.dispose();
