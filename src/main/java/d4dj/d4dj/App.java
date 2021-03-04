@@ -344,7 +344,7 @@ public class App
         	tempLowerTierScores[i]=data[arrayOffset++];
         }
         //System.out.println(Arrays.toString(t20scores));
-        //System.out.println(Arrays.toString(tempLowerTierScores));
+        System.out.println(Arrays.toString(tempLowerTierScores));
         //Lower tier order is: 50,100,500,1000,2000,5000,10000,20000,30000,50000
         
         String[] lowerTierNames = new String[]{"","","","","","","","","",""};
