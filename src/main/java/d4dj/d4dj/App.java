@@ -184,7 +184,7 @@ public class App
 					int count=0;
 					int YMarker=145;
 					while (count++<MAXTRIES) {
-						Color c = new Color(leaderboard2.getRGB(164, YMarker++));
+						Color c = new Color(leaderboard2.getRGB(146, YMarker++));
 						if (c.getRed()==255&&c.getGreen()==255&&c.getBlue()==255) {
 							System.out.println("Step 1 - Found! Y:"+(YMarker-1));
 							break;
@@ -379,9 +379,9 @@ public class App
         	String name = (names.size()>i)?names.get(i):"";
         	System.out.println(ranks[i]+"-"+name+": "+scores.get(i));
         	
-        	new Thread(
+        	/*new Thread(
 					new SubmitThread(name,desc,scores.get(i),EVENT,ranks[i]))
-			.start();
+			.start();*/
         }
         /*System.out.println(scores);
         System.out.println(names);
