@@ -184,12 +184,13 @@ public class App
 					int count=0;
 					int YMarker=145;
 					while (count++<MAXTRIES) {
-						Color c = new Color(leaderboard2.getRGB(146, YMarker++));
-						if (c.getRed()==73&&c.getGreen()==40&&c.getBlue()==180) {
+						Color c = new Color(leaderboard2.getRGB(164, YMarker++));
+						if (c.getRed()==255&&c.getGreen()==255&&c.getBlue()==255) {
 							System.out.println("Step 1 - Found! Y:"+(YMarker-1));
 							break;
 						}
 					}count=0;
+					/*System.out.println("Test");
 					while (count++<MAXTRIES) {
 						Color c = new Color(leaderboard2.getRGB(146, YMarker++));
 						if (c.getRed()>=220&&c.getGreen()>=220&&c.getBlue()>=220) {
@@ -197,16 +198,18 @@ public class App
 							break;
 						}
 					}count=0;
+					System.out.println("Test");*/
 					while (count++<MAXTRIES) {
 						Color c = new Color(leaderboard2.getRGB(146, YMarker--));
 						if (YMarker<=1) {
 							break;
 						}
-						if (c.getRed()==36&&c.getGreen()==17&&c.getBlue()==77) {
+						if (c.getRed()==0&&c.getGreen()==0&&c.getBlue()==0) {
 							System.out.println("Step 3 - Found! Y:"+(YMarker+1));
 							break;
 						}
 					}count=0;
+					System.out.println("Test");
 					int YOFFSET = YMarker+1;
 					
 					for (int i=0;i<cropPoints2.length;i++) {
