@@ -199,6 +199,9 @@ public class App
 					}count=0;
 					while (count++<MAXTRIES) {
 						Color c = new Color(leaderboard2.getRGB(146, YMarker--));
+						if (YMarker<=1) {
+							break;
+						}
 						if (c.getRed()==36&&c.getGreen()==17&&c.getBlue()==77) {
 							System.out.println("Step 3 - Found! Y:"+(YMarker+1));
 							break;
