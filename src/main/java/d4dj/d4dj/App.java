@@ -382,9 +382,9 @@ public class App
         	String name = (names.size()>i)?names.get(i):"";
         	System.out.println(ranks[i]+"-"+name+": "+scores.get(i));
         	
-        	/*new Thread(
+        	new Thread(
 					new SubmitThread(name,desc,scores.get(i),EVENT,ranks[i]))
-			.start();*/
+			.start();
         }
         /*System.out.println(scores);
         System.out.println(names);
