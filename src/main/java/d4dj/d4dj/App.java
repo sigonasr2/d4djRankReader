@@ -348,7 +348,7 @@ public class App
         					break;
         				}
         			}
-        			if (!found&&scores.size()<ranks.length) {
+        			if (!found&&scores.size()<ranks.length&&thisScore!=1000) {
         				scores.add(thisScore);
         			}
         		} else {
