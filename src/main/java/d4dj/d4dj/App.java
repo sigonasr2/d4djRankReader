@@ -320,7 +320,7 @@ public class App
           }
           client.close();
         }
-        //System.out.println(reader);
+        System.out.println(reader);
 
 
         List<String> descriptions = new ArrayList<String>();
@@ -359,17 +359,20 @@ public class App
         		//Expect the next value to be a score.
         		//scoreNext=true;
         	} else
-        	if (ss.charAt(0)=='B') {
+        	if (ss.charAt(0)=='B'||ss.charAt(0)=='b'||(int)(ss.charAt(0))==1042) {
         		//Expect the next value to be a score.
         		//scoreNext=true;
-        		String newString = ss.replaceFirst("B","").trim();
+        		String newString = ss.replaceFirst(Character.toString(ss.charAt(0)),"").trim();
         		names.add(newString);
+        		System.out.println(newString);
         	} else
-        	if (ss.charAt(0)=='C') {
+        	if (ss.charAt(0)=='C'||ss.charAt(0)=='c') {
         		//Expect the next value to be a score.
         		//scoreNext=true;
-        		String newString = ss.replaceFirst("C","").trim();
+        		String newString = ss.replaceFirst(Character.toString(ss.charAt(0)),"").trim();
         		descriptions.add(newString);
+        	} else {
+        		//System.out.println(ss+": "+(int)(ss.charAt(0))+"/"+(int)'B');
         	}
         	//data[count++]=newString;
         }
@@ -379,9 +382,9 @@ public class App
         	String name = (names.size()>i)?names.get(i):"";
         	System.out.println(ranks[i]+"-"+name+": "+scores.get(i));
         	
-        	new Thread(
+        	/*new Thread(
 					new SubmitThread(name,desc,scores.get(i),EVENT,ranks[i]))
-			.start();
+			.start();*/
         }
         /*System.out.println(scores);
         System.out.println(names);
