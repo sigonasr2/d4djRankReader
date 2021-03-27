@@ -403,7 +403,7 @@ public class App
         }
         for (int i=0;i<scores.size();i++) {
         	//System.out.println(names.get(i)+": "+scores.get(i)+"  "+descriptions.get(i));
-        	String desc = (descriptions.size()>i)?descriptions.get(i):"";
+        	String desc = (descriptions.size()>i)?descriptions.get(i).replaceFirst("A",""):"";
         	String name = (names.size()>i)?names.get(i).replaceFirst("A",""):"";
         	System.out.println(ranks[i]+"-"+name+": "+scores.get(i));
 
