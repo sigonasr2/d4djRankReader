@@ -379,10 +379,18 @@ public class App
 	        			
 	        	}break;
 	        	case 0:{
-	        		names.add(ss);
+	        		if (ss.equalsIgnoreCase("A")) {
+	        			count--;
+	        		} else {
+	        			names.add(ss);
+	        		}
 	        	}break;
 	        	case 1:{
-	        		descriptions.add(ss);
+	        		if (ss.equalsIgnoreCase("A")) {
+	        			count--;
+	        		} else {
+	        			descriptions.add(ss);
+	        		}
 	        	}break;
         	}
         }
