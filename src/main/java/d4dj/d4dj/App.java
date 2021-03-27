@@ -379,14 +379,14 @@ public class App
 	        			
 	        	}break;
 	        	case 0:{
-	        		if (ss.equalsIgnoreCase("A")) {
+	        		if (ss.equalsIgnoreCase("A")||ss.equalsIgnoreCase("Α")) {
 	        			count--;
 	        		} else {
 	        			names.add(ss);
 	        		}
 	        	}break;
 	        	case 1:{
-	        		if (ss.equalsIgnoreCase("A")) {
+	        		if (ss.equalsIgnoreCase("A")||ss.equalsIgnoreCase("Α")) {
 	        			count--;
 	        		} else {
 	        			if (StringUtils.isNumeric(ss)) {
@@ -403,8 +403,8 @@ public class App
         }
         for (int i=0;i<scores.size();i++) {
         	//System.out.println(names.get(i)+": "+scores.get(i)+"  "+descriptions.get(i));
-        	String desc = (descriptions.size()>i)?descriptions.get(i).replaceFirst("A",""):"";
-        	String name = (names.size()>i)?names.get(i).replaceFirst("A",""):"";
+        	String desc = (descriptions.size()>i)?(descriptions.get(i).charAt(0)=='A'||descriptions.get(i).charAt(0)=='Α')?descriptions.get(i).substring(1):descriptions.get(i):"";
+        	String name = (names.size()>i)?(names.get(i).charAt(0)=='A'||names.get(i).charAt(0)=='Α')?names.get(i).substring(1):names.get(i):"";
         	System.out.println(ranks[i]+"-"+name+": "+scores.get(i));
 
 			if (StringUtils.isNumeric(desc)&&scores.get(i)==0) {
