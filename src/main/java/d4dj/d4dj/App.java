@@ -348,34 +348,7 @@ public class App
         	//String newString = ss;//.replaceFirst("A","").trim();
         	switch ((count++)%3) {
 	        	case 2:{
-	        		if (scores.size()>20) {
-	        			//See if this score is already in list.
-	        			if (StringUtils.isNumeric(ss)) {
-		        			int thisScore = Integer.parseInt(ss);
-		        			boolean found=false;
-		        			for (int i=0;i<scores.size();i++) {
-		        				if (thisScore==scores.get(i)) {
-		        					found=true;
-		        					break;
-		        				}
-		        			}
-		        			if (StringUtils.isNumeric(ss)) {
-			        			if (!found&&scores.size()<ranks.length) {
-			        				scores.add(thisScore);
-			        			}
-		        			} else {
-		        				scores.add(0);
-		        			}
-	        			} else {
-	        				scores.add(0);
-	        			}
-	        		} else {
-	        			if (StringUtils.isNumeric(ss)) {
-	        				scores.add(Integer.parseInt(ss));
-	        			} else {
-	        				scores.add(0);
-	        			}
-	        		}
+	        		AddScore(scores, ranks, ss);
 	        			
 	        	}break;
 	        	case 0:{
@@ -392,7 +365,8 @@ public class App
 	        			if (StringUtils.isNumeric(ss)) {
 	        				descriptions.add(names.get(names.size()-1));
 	        				names.set(names.size()-1,"?");
-	        				scores.add(Integer.parseInt(ss));
+	        				//scores.add(Integer.parseInt(ss));
+	        				AddScore(scores,ranks,ss);
 	        				count++;
 	        			} else {
 	        				descriptions.add(ss);
@@ -460,5 +434,36 @@ public class App
 	      }
         */
       }
+
+	private static void AddScore(List<Integer> scores, int[] ranks, String ss) {
+		if (scores.size()>20) {
+			//See if this score is already in list.
+			if (StringUtils.isNumeric(ss)) {
+				int thisScore = Integer.parseInt(ss);
+				boolean found=false;
+				for (int i=0;i<scores.size();i++) {
+					if (thisScore==scores.get(i)) {
+						found=true;
+						break;
+					}
+				}
+				if (StringUtils.isNumeric(ss)) {
+					if (!found&&scores.size()<ranks.length) {
+						scores.add(thisScore);
+					}
+				} else {
+					scores.add(0);
+				}
+			} else {
+				scores.add(0);
+			}
+		} else {
+			if (StringUtils.isNumeric(ss)) {
+				scores.add(Integer.parseInt(ss));
+			} else {
+				scores.add(0);
+			}
+		}
+	}
       
 }
