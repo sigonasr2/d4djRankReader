@@ -22,6 +22,7 @@ import java.util.Scanner;
 import javax.imageio.ImageIO;
 
 import org.apache.commons.lang3.StringUtils;
+import org.apache.commons.lang3.math.NumberUtils;
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
 import org.apache.http.NameValuePair;
@@ -349,20 +350,33 @@ public class App
 	        	case 2:{
 	        		if (scores.size()>20) {
 	        			//See if this score is already in list.
-	        			int thisScore = Integer.parseInt(ss);
-	        			boolean found=false;
-	        			for (int i=0;i<scores.size();i++) {
-	        				if (thisScore==scores.get(i)) {
-	        					found=true;
-	        					break;
-	        				}
-	        			}
-	        			if (!found&&scores.size()<ranks.length) {
-	        				scores.add(thisScore);
+	        			if (StringUtils.isNumeric(ss)) {
+		        			int thisScore = Integer.parseInt(ss);
+		        			boolean found=false;
+		        			for (int i=0;i<scores.size();i++) {
+		        				if (thisScore==scores.get(i)) {
+		        					found=true;
+		        					break;
+		        				}
+		        			}
+		        			if (StringUtils.isNumeric(ss)) {
+			        			if (!found&&scores.size()<ranks.length) {
+			        				scores.add(thisScore);
+			        			}
+		        			} else {
+		        				scores.add(0);
+		        			}
+	        			} else {
+	        				scores.add(0);
 	        			}
 	        		} else {
-	        			scores.add(Integer.parseInt(ss));
+	        			if (StringUtils.isNumeric(ss)) {
+	        				scores.add(Integer.parseInt(ss));
+	        			} else {
+	        				scores.add(0);
+	        			}
 	        		}
+	        			
 	        	}break;
 	        	case 0:{
 	        		names.add(ss);
