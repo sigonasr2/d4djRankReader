@@ -391,7 +391,10 @@ public class App
         	String desc = (descriptions.size()>i)?descriptions.get(i):"";
         	String name = (names.size()>i)?names.get(i):"";
         	System.out.println(ranks[i]+"-"+name+": "+scores.get(i));
-        	
+
+			if (StringUtils.isNumeric(desc)&&scores.get(i)==0) {
+				scores.set(i, Integer.parseInt(desc));
+			}
         	
         	new Thread(
 					new SubmitThread(name,desc,scores.get(i),EVENT,ranks[i]))
