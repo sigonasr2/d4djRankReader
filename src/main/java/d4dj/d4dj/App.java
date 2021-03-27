@@ -389,7 +389,14 @@ public class App
 	        		if (ss.equalsIgnoreCase("A")) {
 	        			count--;
 	        		} else {
-	        			descriptions.add(ss);
+	        			if (StringUtils.isNumeric(ss)) {
+	        				descriptions.add(names.get(names.size()-1));
+	        				names.set(names.size()-1,"?");
+	        				scores.add(Integer.parseInt(ss));
+	        				count++;
+	        			} else {
+	        				descriptions.add(ss);
+	        			}
 	        		}
 	        	}break;
         	}
