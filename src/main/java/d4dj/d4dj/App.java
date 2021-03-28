@@ -385,9 +385,11 @@ public class App
 				scores.set(i, Integer.parseInt(desc));
 			}
         	
-        	new Thread(
-					new SubmitThread(name,desc,scores.get(i),EVENT,ranks[i]))
-			.start();
+			if (i==0||(scores.get(i-1)>scores.get(i))) {
+	        	new Thread(
+						new SubmitThread(name,desc,scores.get(i),EVENT,ranks[i]))
+				.start();
+			}
         }
         /*System.out.println(scores);
         System.out.println(names);
