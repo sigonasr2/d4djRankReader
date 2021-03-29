@@ -355,12 +355,22 @@ public class App
 	        		if (ss.equalsIgnoreCase("A")||ss.equalsIgnoreCase("Α")) {
 	        			count--;
 	        		} else {
+	        			if (StringUtils.isNumeric(ss)) {
+	        				descriptions.add("?");
+	        				names.add("?");
+	        				//scores.add(Integer.parseInt(ss));
+	        				AddScore(scores,ranks,ss);
+	        				count++;
+	        			} else {
+	        				descriptions.add(ss);
+	        			}
 	        			names.add(ss);
 	        		}
 	        	}break;
 	        	case 1:{
 	        		if (ss.equalsIgnoreCase("A")||ss.equalsIgnoreCase("Α")) {
 	        			count--;
+	        			//names.add("");
 	        		} else {
 	        			if (StringUtils.isNumeric(ss)) {
 	        				descriptions.add(names.get(names.size()-1));
