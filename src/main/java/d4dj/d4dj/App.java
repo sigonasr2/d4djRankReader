@@ -361,6 +361,7 @@ public class App
         		"00011","00012","00013","00014","00015","00016","00017","00018","00019","00020",
         		"00050","00100","00500","01000","02000","05000","10000","20000","30000","50000"
         };
+        System.out.println(count+"/"+s.length);
     	while (count<s.length) {
 	        if (s[count].equalsIgnoreCase(orderedRanks[rankIndex])) {
 	        	List<String> mydata = new ArrayList<String>();
