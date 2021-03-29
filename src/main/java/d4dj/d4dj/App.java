@@ -1,6 +1,7 @@
 package d4dj.d4dj;
 
 import java.awt.Color;
+import java.awt.Font;
 import java.awt.Graphics2D;
 import java.awt.Image;
 import java.awt.Point;
@@ -92,7 +93,8 @@ class SubmitThread implements Runnable{
 		    try (InputStream instream = entity.getContent()) {
 		    	Scanner s = new Scanner(instream).useDelimiter("\\A");
 		    	String result = s.hasNext() ? s.next() : "";
-				System.out.println("Rank "+rank+": "+result+"("+points+")");
+				//System.out.println("Rank "+rank+": "+result+"("+points+")");
+				System.out.println(rank+": "+name+" ("+description+") - "+points);
 		    	instream.close();
 		    } catch (UnsupportedOperationException | IOException e) {
 				e.printStackTrace();
@@ -106,6 +108,11 @@ public class App
 	final static int EVENT = 14;
 	public static int[] lastScores = new int[]{0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0};
 	public static int[] lastLowerTierScores = new int[]{0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0};
+	public static Font myFont = new Font("Courier", Font.BOLD, 26);
+    public static int[] ranks = new int[] {1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,
+    		50,100,500,1000,2000,5000,10000,20000,30000,50000};
+    public static int[] drawRanks = new int[] {1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,
+    		50,100,500,1000,2000,5000,10000,20000,30000,100,500,1000,2000,5000,10000,20000,30000,50000};
 	
     public static void main( String[] args ) throws IOException
     {
@@ -173,11 +180,10 @@ public class App
 					Graphics2D g = cropped1.createGraphics();
 					//For comments: down by 40, width is 340.
 					for (int i=0;i<cropPoints1.length;i++) { //1-9
-						drawData(g,1,leaderboard, 20, (i)*42, 20+200, (i)*42+26, cropPoints1[i].x, cropPoints1[i].y, cropPoints1[i].x+cropPoints1[i].width, cropPoints1[i].y+cropPoints1[i].height, null);
+						drawData(g,1,leaderboard, 100, (i)*42, 100+200, (i)*42+26, cropPoints1[i].x, cropPoints1[i].y, cropPoints1[i].x+cropPoints1[i].width, cropPoints1[i].y+cropPoints1[i].height, null);
 						drawData(g,2,leaderboard, 320, (i)*42, 320+340, (i)*42+26, cropPoints1[i].x, cropPoints1[i].y+41, cropPoints1[i].x+340, cropPoints1[i].y+cropPoints1[i].height+41, null);
 						drawData(g,0,leaderboard, 740, (i)*42, 740+130, (i)*42+24, cropPoints1[i].x+351, cropPoints1[i].y+34, cropPoints1[i].x+481, cropPoints1[i].y+58, null);
 					}
-					
 					
 					//start at X 146
 					//Find R73,G40,B180
@@ -217,25 +223,30 @@ public class App
 					int YOFFSET = YMarker+1;
 					
 					for (int i=0;i<cropPoints2.length;i++) {//10-11
-						drawData(g,1,leaderboard2, 20, (i+9)*42, 20+200, (i+9)*42+26, cropPoints2[i].x, YOFFSET+cropPoints2[i].y, cropPoints2[i].x+cropPoints2[i].width, YOFFSET+cropPoints2[i].y+cropPoints2[i].height, null);
+						drawData(g,1,leaderboard2,100, (i+9)*42, 100+200, (i+9)*42+26, cropPoints2[i].x, YOFFSET+cropPoints2[i].y, cropPoints2[i].x+cropPoints2[i].width, YOFFSET+cropPoints2[i].y+cropPoints2[i].height, null);
 						drawData(g,2,leaderboard2, 320, (i+9)*42, 320+340, (i+9)*42+26, cropPoints2[i].x, YOFFSET+cropPoints2[i].y+44, cropPoints2[i].x+340, YOFFSET+cropPoints2[i].y+cropPoints2[i].height+44, null);
 						drawData(g,0,leaderboard2, 740, (i+9)*42, 740+130, (i+9)*42+24, cropPoints2[i].x+351, YOFFSET+cropPoints2[i].y+34, cropPoints2[i].x+481, YOFFSET+cropPoints2[i].y+58, null);
 					}
 					for (int i=0;i<cropPoints3.length;i++) {//12-20
-						drawData(g,1,leaderboard3, 20, (i+11)*42, 20+200, (i+11)*42+26, cropPoints3[i].x, cropPoints3[i].y, cropPoints3[i].x+cropPoints3[i].width, cropPoints3[i].y+cropPoints3[i].height, null);
+						drawData(g,1,leaderboard3, 100, (i+11)*42, 100+200, (i+11)*42+26, cropPoints3[i].x, cropPoints3[i].y, cropPoints3[i].x+cropPoints3[i].width, cropPoints3[i].y+cropPoints3[i].height, null);
 						drawData(g,2,leaderboard3, 320, (i+11)*42, 320+340, (i+11)*42+26, cropPoints3[i].x, cropPoints3[i].y+41, cropPoints3[i].x+340, cropPoints3[i].y+cropPoints3[i].height+41, null);
 						drawData(g,0,leaderboard3, 740, (i+11)*42, 740+130, (i+11)*42+24, cropPoints3[i].x+351, cropPoints3[i].y+34, cropPoints3[i].x+481, cropPoints3[i].y+58, null);
 					}
 					for (int i=0;i<cropPoints1.length;i++) {//50-30000
-						drawData(g,1,leaderboard4, 20, (i+20)*42, 20+200, (i+20)*42+26, cropPoints1[i].x, cropPoints1[i].y, cropPoints1[i].x+cropPoints1[i].width, cropPoints1[i].y+cropPoints1[i].height, null);
+						drawData(g,1,leaderboard4, 100, (i+20)*42, 100+200, (i+20)*42+26, cropPoints1[i].x, cropPoints1[i].y, cropPoints1[i].x+cropPoints1[i].width, cropPoints1[i].y+cropPoints1[i].height, null);
 						drawData(g,2,leaderboard4, 320, (i+20)*42, 320+340, (i+20)*42+26, cropPoints1[i].x, cropPoints1[i].y+41, cropPoints1[i].x+340, cropPoints1[i].y+cropPoints1[i].height+41, null);
 						drawData(g,0,leaderboard4, 740, (i+20)*42, 740+130, (i+20)*42+24, cropPoints1[i].x+351, cropPoints1[i].y+34, cropPoints1[i].x+481, cropPoints1[i].y+58, null);
 					}
 					for (int i=0;i<cropPoints3.length;i++) {//100-50000
-						drawData(g,1,leaderboard5, 20, (i+29)*42, 20+200, (i+29)*42+26, cropPoints3[i].x, cropPoints3[i].y, cropPoints3[i].x+cropPoints3[i].width, cropPoints3[i].y+cropPoints3[i].height, null);
+						drawData(g,1,leaderboard5, 100, (i+29)*42, 100+200, (i+29)*42+26, cropPoints3[i].x, cropPoints3[i].y, cropPoints3[i].x+cropPoints3[i].width, cropPoints3[i].y+cropPoints3[i].height, null);
 						drawData(g,2,leaderboard5, 320, (i+29)*42, 320+340, (i+29)*42+26, cropPoints3[i].x, cropPoints3[i].y+41, cropPoints3[i].x+340, cropPoints3[i].y+cropPoints3[i].height+41, null);
 						drawData(g,0,leaderboard5, 740, (i+29)*42, 740+130, (i+29)*42+24, cropPoints3[i].x+351, cropPoints3[i].y+34, cropPoints3[i].x+481, cropPoints3[i].y+58, null);
 					}
+					
+					for (int i=0;i<drawRanks.length;i++) {
+						drawRank(g,drawRanks[i],i*42);
+					}
+					
 					ImageIO.write(cropped1,"png",new File("testing_leaderboardnames.png"));
 					g.dispose();
 					cropped1.flush();
@@ -282,14 +293,24 @@ public class App
 	    		  //g.drawImage(paragraph, 0, j, 18, l, 0, 0, 18, 23, object);
 	    	  }break;
 	    	  case 1:{
-	    		  g.drawImage(paragraph, 2, j, 20, l, 0, 0, 18, 23, object);
+	    		  //g.drawImage(paragraph, 2, j, 20, l, 0, 0, 18, 23, object);
 	    	  }break;
 	    	  case 2:{
-	    		  g.drawImage(paragraph, i-18, j, i, l, 0, 0, 18, 23, object);
+	    		  ///g.drawImage(paragraph, i-18, j, i, l, 0, 0, 18, 23, object);
 	    	  }break;
     	  }
     	  g.drawImage(leaderboard, i, j, k, l, x, y, m, n, object);
 	}
+      
+      private static void drawRank(Graphics2D g,int number,int y) {
+    	  g.setFont(myFont);
+    	  g.setColor(Color.BLACK);
+    	  String numb=Integer.toString(number);
+    	  for (int i=0;i<5-Integer.toString(number).length();i++) {
+    		  numb="0"+numb;
+    	  }
+    	  g.drawString(numb,0,y+24);
+      }
 
 	// Detects text in the specified image.
       public static void detectText(String filePath) throws IOException {
@@ -335,55 +356,89 @@ public class App
         List<String> descriptions = new ArrayList<String>();
         List<String> names = new ArrayList<String>();
         List<Integer> scores = new ArrayList<Integer>();
-        int[] ranks = new int[] {1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,
-        		50,100,500,1000,2000,5000,10000,20000,30000,50000};
-        
         
         String[] s = reader.toString().split("\n");
         String[] data = new String[s.length];
         int count=0;
+        int rankIndex=0;
         boolean scoreNext=false;
-        for (String ss : s) {
-        	//System.out.println(ss.replaceFirst("A","").trim());
-        	//String newString = ss;//.replaceFirst("A","").trim();
-        	switch ((count++)%3) {
-	        	case 2:{
-	        		AddScore(scores, ranks, ss);
-	        			
-	        	}break;
-	        	case 0:{
-	        		if (ss.equalsIgnoreCase("A")||ss.equalsIgnoreCase("Α")) {
-	        			count--;
-	        		} else {
-	        			if (StringUtils.isNumeric(ss)) {
-	        				descriptions.add("?");
-	        				names.add("?");
-	        				//scores.add(Integer.parseInt(ss));
-	        				AddScore(scores,ranks,ss);
-	        				count=0;
-	        			} else {
-		        			names.add(ss);
-	        			}
+        String[] orderedRanks= new String[] {
+        		"00001","00002","00003","00004","00005","00006","00007","00008","00009","00010",
+        		"00011","00012","00013","00014","00015","00016","00017","00018","00019","00020",
+        		"00050","00100","00500","01000","02000","05000","10000","20000","30000","50000"
+        };
+    	List<String> collection = new ArrayList<String>();
+    	while (count<s.length) {
+	        if (s[count].equalsIgnoreCase(orderedRanks[rankIndex])) {
+	        	List<String> mydata = new ArrayList<String>();
+	        	count++;
+	        	mydata.add(orderedRanks[rankIndex]);
+	        	while (count<s.length) {
+	        		String nextRank=(rankIndex+1<orderedRanks.length)?orderedRanks[rankIndex+1]:"FDAJIVOAJVIAJJQ";
+	        		if (s[count].equalsIgnoreCase(nextRank)) {
+	        			break;
 	        		}
-	        	}break;
-	        	case 1:{
-	        		if (ss.equalsIgnoreCase("A")||ss.equalsIgnoreCase("Α")) {
-	        			count--;
-	        			//names.add("");
-	        		} else {
-	        			if (StringUtils.isNumeric(ss)) {
-	        				descriptions.add(names.get(names.size()-1));
-	        				names.set(names.size()-1,"?");
-	        				//scores.add(Integer.parseInt(ss));
-	        				AddScore(scores,ranks,ss);
-	        				count++;
-	        			} else {
-	        				descriptions.add(ss);
+	        		mydata.add(s[count++]);
+	        	}
+	        	System.out.println("Data: "+mydata);
+	        	if (mydata.size()==4&&StringUtils.isNumeric(mydata.get(3))) {
+	        		new Thread(
+							new SubmitThread(mydata.get(1),mydata.get(2),Integer.parseInt(mydata.get(3)),EVENT,Integer.parseInt(mydata.get(0))))
+					.start();
+	        	} else
+	        	if (mydata.size()==3&&StringUtils.isNumeric(mydata.get(2))) {
+	        		new Thread(
+							new SubmitThread(mydata.get(1),"MuniMuni",Integer.parseInt(mydata.get(2)),EVENT,Integer.parseInt(mydata.get(0))))
+					.start();
+	        	} else
+	        	if (mydata.size()==2&&StringUtils.isNumeric(mydata.get(1))) {
+	        		new Thread(
+							new SubmitThread("Muni","MuniMuni",Integer.parseInt(mydata.get(1)),EVENT,Integer.parseInt(mydata.get(0))))
+					.start();
+	        	} else
+	        	if (mydata.size()>4) {
+	        		int marker=1;
+	        		boolean foundName=false;
+	        		boolean foundDesc=false;
+	        		boolean foundPoints=false;
+	        		String name = "";
+	        		String desc = "";
+	        		int points = 0;
+	        		boolean submitted=false;
+	        		while (marker<mydata.size()) {
+	        			if (!foundName&&mydata.get(marker).length()>0) {
+	        				foundName=true;
+	        				name = mydata.get(marker);
+	        			} else
+	        			if (!foundDesc&&mydata.get(marker).length()>0) {
+	        				foundDesc=true;
+	        				desc = mydata.get(marker);
+	        			} else 
+	        			if (!foundPoints&&StringUtils.isNumeric(mydata.get(marker))&&mydata.get(marker).length()>0) {
+	        				foundPoints=true;
+	        				points = Integer.parseInt(mydata.get(marker));
 	        			}
+	        			marker++;
 	        		}
-	        	}break;
-        	}
-        }
+	        		if (foundName&&foundDesc&&foundPoints) {
+        				new Thread(
+    							new SubmitThread(name,desc,points,EVENT,Integer.parseInt(mydata.get(0))))
+    					.start();
+        				submitted=true;
+        			} else
+	        		{
+	        			System.out.println("Could not make a template from this: "+mydata);
+	        			System.out.println("Name:"+foundName+"-"+name+", Description:"+foundDesc+"-"+desc+", Points:"+foundPoints+"-"+points);
+	        		}
+	        	} else {
+	        		System.out.println("Could not find a suitable format for:"+mydata);
+	        	}
+	        	rankIndex++;
+	        } else {
+	        	count++;
+	        }
+    	}
+    	
         for (int i=0;i<scores.size();i++) {
         	//System.out.println(names.get(i)+": "+scores.get(i)+"  "+descriptions.get(i));
         	String desc = (descriptions.size()>i)?(descriptions.get(i).charAt(0)=='A'||descriptions.get(i).charAt(0)=='Α')?descriptions.get(i).substring(1):descriptions.get(i):"";
@@ -395,9 +450,9 @@ public class App
 			}
         	
 			if (i==0||(scores.get(i-1)>scores.get(i))) {
-	        	new Thread(
+	        /*	new Thread(
 						new SubmitThread(name,desc,scores.get(i),EVENT,ranks[i]))
-				.start();
+				.start();*/
 			}
         }
         /*System.out.println(scores);
