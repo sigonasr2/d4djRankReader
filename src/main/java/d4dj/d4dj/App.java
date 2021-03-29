@@ -66,6 +66,7 @@ class SubmitThread implements Runnable{
 
 	@Override
 	public void run() {
+		System.out.println(rank+": "+name+" ("+description+") - "+points);
 		HttpClient httpclient = HttpClients.createDefault();
 		HttpPost httppost = new HttpPost("http://projectdivar.com/eventsubmit");
 		List<NameValuePair> params = new ArrayList<NameValuePair>();
@@ -93,8 +94,8 @@ class SubmitThread implements Runnable{
 		    try (InputStream instream = entity.getContent()) {
 		    	Scanner s = new Scanner(instream).useDelimiter("\\A");
 		    	String result = s.hasNext() ? s.next() : "";
-				//System.out.println("Rank "+rank+": "+result+"("+points+")");
-				System.out.println(rank+": "+name+" ("+description+") - "+points);
+				System.out.println("Rank "+rank+": "+result+"("+points+")");
+				//System.out.println(rank+": "+name+" ("+description+") - "+points);
 		    	instream.close();
 		    } catch (UnsupportedOperationException | IOException e) {
 				e.printStackTrace();
@@ -351,23 +352,15 @@ public class App
           client.close();
         }
         System.out.println(reader);
-
-
-        List<String> descriptions = new ArrayList<String>();
-        List<String> names = new ArrayList<String>();
-        List<Integer> scores = new ArrayList<Integer>();
         
         String[] s = reader.toString().split("\n");
-        String[] data = new String[s.length];
         int count=0;
         int rankIndex=0;
-        boolean scoreNext=false;
         String[] orderedRanks= new String[] {
         		"00001","00002","00003","00004","00005","00006","00007","00008","00009","00010",
         		"00011","00012","00013","00014","00015","00016","00017","00018","00019","00020",
         		"00050","00100","00500","01000","02000","05000","10000","20000","30000","50000"
         };
-    	List<String> collection = new ArrayList<String>();
     	while (count<s.length) {
 	        if (s[count].equalsIgnoreCase(orderedRanks[rankIndex])) {
 	        	List<String> mydata = new ArrayList<String>();
@@ -439,22 +432,6 @@ public class App
 	        }
     	}
     	
-        for (int i=0;i<scores.size();i++) {
-        	//System.out.println(names.get(i)+": "+scores.get(i)+"  "+descriptions.get(i));
-        	String desc = (descriptions.size()>i)?(descriptions.get(i).charAt(0)=='A'||descriptions.get(i).charAt(0)=='Α')?descriptions.get(i).substring(1):descriptions.get(i):"";
-        	String name = (names.size()>i)?(names.get(i).charAt(0)=='A'||names.get(i).charAt(0)=='Α')?names.get(i).substring(1):names.get(i):"";
-        	System.out.println(ranks[i]+"-"+name+": "+scores.get(i));
-
-			if (StringUtils.isNumeric(desc)&&scores.get(i)==0) {
-				scores.set(i, Integer.parseInt(desc));
-			}
-        	
-			if (i==0||(scores.get(i-1)>scores.get(i))) {
-	        /*	new Thread(
-						new SubmitThread(name,desc,scores.get(i),EVENT,ranks[i]))
-				.start();*/
-			}
-        }
         /*System.out.println(scores);
         System.out.println(names);
         System.out.println(descriptions);*/
