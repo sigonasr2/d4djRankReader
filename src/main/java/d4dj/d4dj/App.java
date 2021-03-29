@@ -109,7 +109,7 @@ public class App
 	final static int EVENT = 14;
 	public static int[] lastScores = new int[]{0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0};
 	public static int[] lastLowerTierScores = new int[]{0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0};
-	public static Font myFont = new Font("Courier", Font.BOLD, 26);
+	public static Font myFont = new Font("Serif", Font.BOLD, 26);
     public static int[] ranks = new int[] {1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,
     		50,100,500,1000,2000,5000,10000,20000,30000,50000};
     public static int[] drawRanks = new int[] {1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,
