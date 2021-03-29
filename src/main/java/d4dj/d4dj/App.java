@@ -360,9 +360,8 @@ public class App
 	        				names.add("?");
 	        				//scores.add(Integer.parseInt(ss));
 	        				AddScore(scores,ranks,ss);
-	        				count++;
+	        				count=0;
 	        			} else {
-	        				descriptions.add(ss);
 		        			names.add(ss);
 	        			}
 	        		}
