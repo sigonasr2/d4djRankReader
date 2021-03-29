@@ -363,8 +363,8 @@ public class App
 	        				count++;
 	        			} else {
 	        				descriptions.add(ss);
+		        			names.add(ss);
 	        			}
-	        			names.add(ss);
 	        		}
 	        	}break;
 	        	case 1:{
