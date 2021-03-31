@@ -367,9 +367,13 @@ public class App
 	        	List<String> mydata = new ArrayList<String>();
 	        	count++;
 	        	mydata.add(orderedRanks[rankIndex]);
+	        	int rank = Integer.parseInt(orderedRanks[rankIndex]);
 	        	while (count<s.length) {
 	        		String nextRank=(rankIndex+1<orderedRanks.length)?orderedRanks[rankIndex+1]:"FDAJIVOAJVIAJJQ";
 	        		if (s[count].equalsIgnoreCase(nextRank)) {
+	        			break;
+	        		}
+	        		if (rank==30000&&s[count].equalsIgnoreCase("00100")) {
 	        			break;
 	        		}
 	        		mydata.add(s[count++]);
