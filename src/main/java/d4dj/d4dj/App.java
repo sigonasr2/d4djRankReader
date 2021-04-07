@@ -106,7 +106,7 @@ class SubmitThread implements Runnable{
 public class App 
 {
 	public static Image paragraph/*,paragraph2,paragraph3*/;
-	final static int EVENT = 14;
+	final static int EVENT = 15;
 	public static int[] lastScores = new int[]{0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0};
 	public static int[] lastLowerTierScores = new int[]{0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0};
 	public static Font myFont = new Font("Serif", Font.BOLD, 26);
