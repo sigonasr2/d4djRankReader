@@ -394,6 +394,11 @@ public class App
 							new SubmitThread(mydata.get(1),"MuniMuni",Integer.parseInt(mydata.get(2)),EVENT,Integer.parseInt(mydata.get(0))))
 					.start();
 	        	} else
+	        	if (mydata.size()==3&&StringUtils.isNumeric(mydata.get(1))) {
+	        		new Thread(
+							new SubmitThread(mydata.get(2),"MuniMuni",Integer.parseInt(mydata.get(1)),EVENT,Integer.parseInt(mydata.get(0))))
+					.start();
+	        	} else
 	        	if (mydata.size()==2&&StringUtils.isNumeric(mydata.get(1))) {
 	        		new Thread(
 							new SubmitThread("Muni","MuniMuni",Integer.parseInt(mydata.get(1)),EVENT,Integer.parseInt(mydata.get(0))))
