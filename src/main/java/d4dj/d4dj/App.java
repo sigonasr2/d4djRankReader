@@ -81,8 +81,9 @@ class SubmitThread implements Runnable{
 			e.printStackTrace();
 		}
 
+		System.out.println("Rank "+rank+": ("+points+")");
 		//Execute and get the response.
-		HttpResponse response = null;
+		/*HttpResponse response = null;
 		try {
 			response = httpclient.execute(httppost);
 		} catch (IOException e) {
@@ -100,7 +101,7 @@ class SubmitThread implements Runnable{
 		    } catch (UnsupportedOperationException | IOException e) {
 				e.printStackTrace();
 			}
-		}
+		}*/
 	}
 }
 public class App 
@@ -113,35 +114,35 @@ public class App
     public static int[] ranks = new int[] {1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,
     		50,100,500,1000,2000,5000,10000,20000,30000,50000};
     public static int[] drawRanks = new int[] {1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,
-    		50,100,500,1000,2000,5000,10000,20000,30000,100,500,1000,2000,5000,10000,20000,30000,50000};
+    		50,100,500,1000,2000,5000,10000,1000,2000,5000,10000,20000,30000,50000};
 	
     public static void main( String[] args ) throws IOException
     {
     	Rectangle[] cropPoints1 = {
-    			new Rectangle(295,163,200,26),
-    			new Rectangle(295,240,200,26),
-    			new Rectangle(295,318,200,26),
-    			new Rectangle(295,396,200,26),
-    			new Rectangle(295,473,200,26),
-    			new Rectangle(295,550,200,26),
-    			new Rectangle(295,628,200,26),
-    			new Rectangle(295,705,200,26),
-    			new Rectangle(295,781,200,26),
+    			new Rectangle(305,163,200,23),
+    			new Rectangle(305,262,200,23),
+    			new Rectangle(305,358,200,23),
+    			new Rectangle(305,453,200,23),
+    			new Rectangle(305,550,200,23),
+    			new Rectangle(305,645,200,23),
+    			new Rectangle(305,740,200,23)
     	};
     	Rectangle[] cropPoints2 = {
-    			new Rectangle(295,-1,200,26),
-    			new Rectangle(295,77,200,26)
+    			new Rectangle(305,-191,200,23),
+    			new Rectangle(305,-96,200,23),
+    			new Rectangle(305,1,200,23),
+    			new Rectangle(305,95,200,23),
+    			new Rectangle(305,191,200,23),
+    			new Rectangle(305,287,200,23)
     	};
     	Rectangle[] cropPoints3 = {
-    			new Rectangle(295,183,200,26),
-    			new Rectangle(295,259,200,26),
-    			new Rectangle(295,337,200,26),
-    			new Rectangle(295,415,200,26),
-    			new Rectangle(295,492,200,26),
-    			new Rectangle(295,569,200,26),
-    			new Rectangle(295,647,200,26),
-    			new Rectangle(295,724,200,26),
-    			new Rectangle(295,801,200,26)
+    			new Rectangle(305,206,200,23),
+    			new Rectangle(305,302,200,23),
+    			new Rectangle(305,398,200,23),
+    			new Rectangle(305,494,200,23),
+    			new Rectangle(305,589,200,23),
+    			new Rectangle(305,686,200,23),
+    			new Rectangle(305,781,200,23)
     	};
 
     	int lastCount=0;
@@ -180,10 +181,10 @@ public class App
 					BufferedImage cropped1 = new BufferedImage(910,42*48,BufferedImage.TYPE_INT_ARGB);
 					Graphics2D g = cropped1.createGraphics();
 					//For comments: down by 40, width is 340.
-					for (int i=0;i<cropPoints1.length;i++) { //1-9
-						drawData(g,1,leaderboard, 100, (i)*42, 100+200, (i)*42+26, cropPoints1[i].x, cropPoints1[i].y, cropPoints1[i].x+cropPoints1[i].width, cropPoints1[i].y+cropPoints1[i].height, null);
-						drawData(g,2,leaderboard, 320, (i)*42, 320+340, (i)*42+26, cropPoints1[i].x, cropPoints1[i].y+41, cropPoints1[i].x+340, cropPoints1[i].y+cropPoints1[i].height+41, null);
-						drawData(g,0,leaderboard, 740, (i)*42, 740+130, (i)*42+24, cropPoints1[i].x+351, cropPoints1[i].y+34, cropPoints1[i].x+481, cropPoints1[i].y+58, null);
+					for (int i=0;i<cropPoints1.length;i++) { //1-7
+						drawData(g,1,leaderboard, 100, (i)*42, 100+200, (i)*42+23, cropPoints1[i].x, cropPoints1[i].y, cropPoints1[i].x+cropPoints1[i].width, cropPoints1[i].y+cropPoints1[i].height, null);
+						drawData(g,2,leaderboard, 320, (i)*42, 320+340, (i)*42+22, cropPoints1[i].x, cropPoints1[i].y+61, cropPoints1[i].x+340, cropPoints1[i].y+84, null);
+						drawData(g,0,leaderboard, 740, (i)*42, 740+130, (i)*42+24, cropPoints1[i].x+373, cropPoints1[i].y+48, cropPoints1[i].x+488, cropPoints1[i].y+72, null);
 					}
 					
 					//start at X 146
@@ -195,7 +196,7 @@ public class App
 					int count=0;
 					int YMarker=145;
 					while (count++<MAXTRIES) {
-						Color c = new Color(leaderboard2.getRGB(146, YMarker++));
+						Color c = new Color(leaderboard2.getRGB(140, YMarker++));
 						if (c.getRed()==255&&c.getGreen()==255&&c.getBlue()==255) {
 							System.out.println("Step 1 - Found! Y:"+(YMarker-1));
 							break;
@@ -211,7 +212,7 @@ public class App
 					}count=0;
 					System.out.println("Test");*/
 					while (count++<MAXTRIES) {
-						Color c = new Color(leaderboard2.getRGB(146, YMarker--));
+						Color c = new Color(leaderboard2.getRGB(140, YMarker--));
 						if (YMarker<=1) {
 							break;
 						}
@@ -223,25 +224,25 @@ public class App
 					System.out.println("Test");
 					int YOFFSET = YMarker+1;
 					
-					for (int i=0;i<cropPoints2.length;i++) {//10-11
-						drawData(g,1,leaderboard2,100, (i+9)*42, 100+200, (i+9)*42+26, cropPoints2[i].x, YOFFSET+cropPoints2[i].y, cropPoints2[i].x+cropPoints2[i].width, YOFFSET+cropPoints2[i].y+cropPoints2[i].height, null);
-						drawData(g,2,leaderboard2, 320, (i+9)*42, 320+340, (i+9)*42+26, cropPoints2[i].x, YOFFSET+cropPoints2[i].y+44, cropPoints2[i].x+340, YOFFSET+cropPoints2[i].y+cropPoints2[i].height+44, null);
-						drawData(g,0,leaderboard2, 740, (i+9)*42, 740+130, (i+9)*42+24, cropPoints2[i].x+351, YOFFSET+cropPoints2[i].y+34, cropPoints2[i].x+481, YOFFSET+cropPoints2[i].y+58, null);
+					for (int i=0;i<cropPoints2.length;i++) {//8-13
+						drawData(g,1,leaderboard2,100, (i+7)*42, 100+200, (i+7)*42+23, cropPoints2[i].x, YOFFSET+cropPoints2[i].y, cropPoints2[i].x+cropPoints2[i].width, YOFFSET+cropPoints2[i].y+cropPoints2[i].height, null);
+						drawData(g,2,leaderboard2, 320, (i+7)*42, 320+340, (i+7)*42+22, cropPoints2[i].x, YOFFSET+cropPoints2[i].y+61, cropPoints2[i].x+340, YOFFSET+cropPoints2[i].y+84, null);
+						drawData(g,0,leaderboard2, 740, (i+7)*42, 740+130, (i+7)*42+24, cropPoints2[i].x+373, YOFFSET+cropPoints2[i].y+48, cropPoints2[i].x+488, YOFFSET+cropPoints2[i].y+72, null);
 					}
 					for (int i=0;i<cropPoints3.length;i++) {//12-20
-						drawData(g,1,leaderboard3, 100, (i+11)*42, 100+200, (i+11)*42+26, cropPoints3[i].x, cropPoints3[i].y, cropPoints3[i].x+cropPoints3[i].width, cropPoints3[i].y+cropPoints3[i].height, null);
-						drawData(g,2,leaderboard3, 320, (i+11)*42, 320+340, (i+11)*42+26, cropPoints3[i].x, cropPoints3[i].y+41, cropPoints3[i].x+340, cropPoints3[i].y+cropPoints3[i].height+41, null);
-						drawData(g,0,leaderboard3, 740, (i+11)*42, 740+130, (i+11)*42+24, cropPoints3[i].x+351, cropPoints3[i].y+34, cropPoints3[i].x+481, cropPoints3[i].y+58, null);
+						drawData(g,1,leaderboard3, 100, (i+13)*42, 100+200, (i+13)*42+23, cropPoints3[i].x, cropPoints3[i].y, cropPoints3[i].x+cropPoints3[i].width, cropPoints3[i].y+cropPoints3[i].height, null);
+						drawData(g,2,leaderboard3, 320, (i+13)*42, 320+340, (i+13)*42+22, cropPoints3[i].x, cropPoints3[i].y+61, cropPoints3[i].x+340, cropPoints3[i].y+84, null);
+						drawData(g,0,leaderboard3, 740, (i+13)*42, 740+130, (i+13)*42+24, cropPoints3[i].x+373, cropPoints3[i].y+48, cropPoints3[i].x+488, cropPoints3[i].y+72, null);
 					}
-					for (int i=0;i<cropPoints1.length;i++) {//50-30000
-						drawData(g,1,leaderboard4, 100, (i+20)*42, 100+200, (i+20)*42+26, cropPoints1[i].x, cropPoints1[i].y, cropPoints1[i].x+cropPoints1[i].width, cropPoints1[i].y+cropPoints1[i].height, null);
-						drawData(g,2,leaderboard4, 320, (i+20)*42, 320+340, (i+20)*42+26, cropPoints1[i].x, cropPoints1[i].y+41, cropPoints1[i].x+340, cropPoints1[i].y+cropPoints1[i].height+41, null);
-						drawData(g,0,leaderboard4, 740, (i+20)*42, 740+130, (i+20)*42+24, cropPoints1[i].x+351, cropPoints1[i].y+34, cropPoints1[i].x+481, cropPoints1[i].y+58, null);
+					for (int i=0;i<cropPoints1.length;i++) {//50-10000
+						drawData(g,1,leaderboard4, 100, (i+20)*42, 100+200, (i+20)*42+23, cropPoints1[i].x, cropPoints1[i].y, cropPoints1[i].x+cropPoints1[i].width, cropPoints1[i].y+cropPoints1[i].height, null);
+						drawData(g,2,leaderboard4, 320, (i+20)*42, 320+340, (i+20)*42+26, cropPoints1[i].x, cropPoints1[i].y+61, cropPoints1[i].x+340, cropPoints1[i].y+84, null);
+						drawData(g,0,leaderboard4, 740, (i+20)*42, 740+130, (i+20)*42+24, cropPoints1[i].x+373, cropPoints1[i].y+48, cropPoints1[i].x+488, cropPoints1[i].y+72, null);
 					}
-					for (int i=0;i<cropPoints3.length;i++) {//100-50000
-						drawData(g,1,leaderboard5, 100, (i+29)*42, 100+200, (i+29)*42+26, cropPoints3[i].x, cropPoints3[i].y, cropPoints3[i].x+cropPoints3[i].width, cropPoints3[i].y+cropPoints3[i].height, null);
-						drawData(g,2,leaderboard5, 320, (i+29)*42, 320+340, (i+29)*42+26, cropPoints3[i].x, cropPoints3[i].y+41, cropPoints3[i].x+340, cropPoints3[i].y+cropPoints3[i].height+41, null);
-						drawData(g,0,leaderboard5, 740, (i+29)*42, 740+130, (i+29)*42+24, cropPoints3[i].x+351, cropPoints3[i].y+34, cropPoints3[i].x+481, cropPoints3[i].y+58, null);
+					for (int i=0;i<cropPoints3.length;i++) {//10000-50000
+						drawData(g,1,leaderboard5, 100, (i+27)*42, 100+200, (i+27)*42+23, cropPoints3[i].x, cropPoints3[i].y, cropPoints3[i].x+cropPoints3[i].width, cropPoints3[i].y+cropPoints3[i].height, null);
+						drawData(g,2,leaderboard5, 320, (i+27)*42, 320+340, (i+27)*42+22, cropPoints3[i].x, cropPoints3[i].y+61, cropPoints3[i].x+340, cropPoints3[i].y+84, null);
+						drawData(g,0,leaderboard5, 740, (i+27)*42, 740+130, (i+27)*42+24, cropPoints3[i].x+373, cropPoints3[i].y+48, cropPoints3[i].x+488, cropPoints3[i].y+72, null);
 					}
 					
 					for (int i=0;i<drawRanks.length;i++) {
