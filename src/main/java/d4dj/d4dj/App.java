@@ -83,7 +83,7 @@ class SubmitThread implements Runnable{
 
 		System.out.println("Rank "+rank+": ("+points+")");
 		//Execute and get the response.
-		/*HttpResponse response = null;
+		HttpResponse response = null;
 		try {
 			response = httpclient.execute(httppost);
 		} catch (IOException e) {
@@ -101,7 +101,7 @@ class SubmitThread implements Runnable{
 		    } catch (UnsupportedOperationException | IOException e) {
 				e.printStackTrace();
 			}
-		}*/
+		}
 	}
 }
 public class App 
