@@ -55,13 +55,15 @@ import sig.utils.ImageUtils;
 class SubmitThread implements Runnable{
 	String name,description;
 	int event,rank,points;
+	boolean FINAL;
 	
-	SubmitThread(String name,String description,int points,int event,int rank) {
+	SubmitThread(String name,String description,int points,int event,int rank,boolean FINAL) {
 		this.name=name;
 		this.description=description;
 		this.points=points;
 		this.event=event;
 		this.rank=rank;
+		this.FINAL=FINAL;
 	}
 
 	@Override
@@ -75,6 +77,9 @@ class SubmitThread implements Runnable{
 		params.add(new BasicNameValuePair("name", name));
 		params.add(new BasicNameValuePair("description", description));
 		params.add(new BasicNameValuePair("points", Integer.toString(points)));
+		if (FINAL) {
+			params.add(new BasicNameValuePair("fin", Boolean.toString(FINAL)));
+		}
 		try {
 			httppost.setEntity(new UrlEncodedFormEntity(params, "UTF-8"));
 		} catch (UnsupportedEncodingException e) {
@@ -115,9 +120,15 @@ public class App
     		50,100,500,1000,2000,5000,10000,20000,30000,50000};
     public static int[] drawRanks = new int[] {1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,
     		50,100,500,1000,2000,5000,10000,1000,2000,5000,10000,20000,30000,50000};
-	
+	public static boolean FINAL = false;
     public static void main( String[] args ) throws IOException
     {
+    	if (args.length>0) {
+    		if (args[0].equalsIgnoreCase("final")) {
+    			FINAL=true;
+    		}
+    	}
+    	
     	Rectangle[] cropPoints1 = {
     			new Rectangle(305,163,200,23),
     			new Rectangle(305,262,200,23),
@@ -382,27 +393,27 @@ public class App
 	        	System.out.println("Data: "+mydata);
 	        	if (mydata.size()==4&&StringUtils.isNumeric(mydata.get(3))) {
 	        		new Thread(
-							new SubmitThread(mydata.get(1),mydata.get(2),Integer.parseInt(mydata.get(3)),EVENT,Integer.parseInt(mydata.get(0))))
+							new SubmitThread(mydata.get(1),mydata.get(2),Integer.parseInt(mydata.get(3)),EVENT,Integer.parseInt(mydata.get(0)),FINAL))
 					.start();
 	        	} else
 	        	if (mydata.size()==4&&StringUtils.isNumeric(mydata.get(2))) {
 	        		new Thread(
-							new SubmitThread(mydata.get(3),mydata.get(1),Integer.parseInt(mydata.get(2)),EVENT,Integer.parseInt(mydata.get(0))))
+							new SubmitThread(mydata.get(3),mydata.get(1),Integer.parseInt(mydata.get(2)),EVENT,Integer.parseInt(mydata.get(0)),FINAL))
 					.start();
 	        	} else
 	        	if (mydata.size()==3&&StringUtils.isNumeric(mydata.get(2))) {
 	        		new Thread(
-							new SubmitThread(mydata.get(1),"MuniMuni",Integer.parseInt(mydata.get(2)),EVENT,Integer.parseInt(mydata.get(0))))
+							new SubmitThread(mydata.get(1),"MuniMuni",Integer.parseInt(mydata.get(2)),EVENT,Integer.parseInt(mydata.get(0)),FINAL))
 					.start();
 	        	} else
 	        	if (mydata.size()==3&&StringUtils.isNumeric(mydata.get(1))) {
 	        		new Thread(
-							new SubmitThread(mydata.get(2),"MuniMuni",Integer.parseInt(mydata.get(1)),EVENT,Integer.parseInt(mydata.get(0))))
+							new SubmitThread(mydata.get(2),"MuniMuni",Integer.parseInt(mydata.get(1)),EVENT,Integer.parseInt(mydata.get(0)),FINAL))
 					.start();
 	        	} else
 	        	if (mydata.size()==2&&StringUtils.isNumeric(mydata.get(1))) {
 	        		new Thread(
-							new SubmitThread("Muni","MuniMuni",Integer.parseInt(mydata.get(1)),EVENT,Integer.parseInt(mydata.get(0))))
+							new SubmitThread("Muni","MuniMuni",Integer.parseInt(mydata.get(1)),EVENT,Integer.parseInt(mydata.get(0)),FINAL))
 					.start();
 	        	} else
 	        	if (mydata.size()>4) {
@@ -431,7 +442,7 @@ public class App
 	        		}
 	        		if (foundName&&foundDesc&&foundPoints) {
         				new Thread(
-    							new SubmitThread(name,desc,points,EVENT,Integer.parseInt(mydata.get(0))))
+    							new SubmitThread(name,desc,points,EVENT,Integer.parseInt(mydata.get(0)),FINAL))
     					.start();
         				submitted=true;
         			} else
