@@ -112,7 +112,7 @@ class SubmitThread implements Runnable{
 public class App 
 {
 	public static Image paragraph/*,paragraph2,paragraph3*/;
-	final static int EVENT = 19;
+	final static int EVENT = 20;
 	public static int[] lastScores = new int[]{0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0};
 	public static int[] lastLowerTierScores = new int[]{0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0};
 	public static Font myFont = new Font("Serif", Font.BOLD, 26);
@@ -373,6 +373,9 @@ public class App
         		"00011","00012","00013","00014","00015","00016","00017","00018","00019","00020",
         		"00050","00100","00500","01000","02000","05000","10000","20000","30000","50000"
         };
+        int[] dupData = new int[] {
+        		-1,-1,-1,-1,-1
+        }; //Contains specifically 5k,10k,20k,30k,and 50k data.
         System.out.println(count+"/"+s.length);
     	while (count<s.length) {
 	        if (s[count].equalsIgnoreCase(orderedRanks[rankIndex])) {
