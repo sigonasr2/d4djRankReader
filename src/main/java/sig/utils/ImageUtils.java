@@ -1,12 +1,17 @@
 package sig.utils;
 
 import java.awt.Color;
+import javax.imageio.ImageIO;
 import java.awt.Graphics2D;
 import java.awt.GraphicsConfiguration;
 import java.awt.GraphicsEnvironment;
 import java.awt.Image;
 import java.awt.Rectangle;
 import java.awt.image.BufferedImage;
+import java.awt.image.ColorModel;
+import java.awt.image.WritableRaster;
+import java.io.File;
+import java.io.IOException;
 
 public class ImageUtils {
 	/**
@@ -91,4 +96,41 @@ public class ImageUtils {
 	public static double distanceToColor(Color p2, Color p1) {
 		return Math.sqrt(Math.pow(p2.getRed()-p1.getRed(), 2)+Math.pow(p2.getGreen()-p1.getGreen(), 2)+Math.pow(p2.getBlue()-p1.getBlue(), 2));
 	}
+	public static BufferedImage invertImage(BufferedImage inputFile) {
+        for (int x = 0; x < inputFile.getWidth(); x++) {
+            for (int y = 0; y < inputFile.getHeight(); y++) {
+                int rgba = inputFile.getRGB(x, y);
+                Color col = new Color(rgba, true);
+                col = new Color(255 - col.getRed(),
+                                255 - col.getGreen(),
+                                255 - col.getBlue());
+                inputFile.setRGB(x, y, col.getRGB());
+            }
+        }
+        return inputFile;
+    }
+	public static BufferedImage
+	removeBrightPixels(BufferedImage inputFile,int threshold) {
+        for (int x = 0; x < inputFile.getWidth(); x++) {
+            for (int y = 0; y < inputFile.getHeight(); y++) {
+                int rgba = inputFile.getRGB(x, y);
+                Color col = new Color(rgba, true);
+                if (col.getRed()+col.getGreen()+col.getBlue()>threshold) {
+	                col = new Color(255,
+	                                255,
+	                                255,0);
+	                inputFile.setRGB(x, y, col.getRGB());
+                } else {
+                	inputFile.setRGB(x, y, Color.BLACK.getRGB());
+                }
+            }
+        }
+        return inputFile;
+    }
+	public static BufferedImage deepCopy(BufferedImage bi) {
+		 ColorModel cm = bi.getColorModel();
+		 boolean isAlphaPremultiplied = cm.isAlphaPremultiplied();
+		 WritableRaster raster = bi.copyData(null);
+		 return new BufferedImage(cm, raster, isAlphaPremultiplied, null);
+		}
 }
